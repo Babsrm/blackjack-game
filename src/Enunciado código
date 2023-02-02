@@ -1,0 +1,84 @@
+Vamos a poner en práctica el uso de listas para implementar un juego de 
+Blackjack, para ello vamos a implementar una serie de clases.
+
+Clase Carta
+
+Contiene los datos correspondientes a una Carta. La clase carta definirá un 
+tipo enumerado para los palos de las cartas. Lo puedes definir dentro de la 
+clase de la siguiente manera:
+enum Palo {
+TREBOL, DIAMANTES, CORAZONES, PICAS
+};
+
+Una carta tendrá sólo dos tipos de datos:
+• Número de la carta. Es un numero del 1 al 12
+• Palo. De tipo Palo (el tipo enumerado)
+Define los siguientes métodos:
+• Constructor parametrizado al que le pases el numero y el palo, y 
+asigne los valores. El número deberá estar entre 1 y 13.
+• Métodos getters de los atributos de las cartas. No crear lo setters
+• Método getValor que devuelve el valor que tiene cada carta en el 
+BlackJack. Los valores serán: 11 para el AS (1), 10 para las figuras 
+(J,Q,K o 11, 12 y 13) y el valor correspondiente para el resto de las 
+cartas (2, 3, 4, 5, 6, 7, 8, 9)
+• Método mostrarNumero sin parámetros que devuelve un String con 
+la representación de cada número. Para el 1 habrá que mostrar 
+“AS”, para la 11 habrá que mostrar “J”, para la 12 habrá que 
+mostrar “Q”, para la 13 “K” y para el resto su correspondiente valor.
+• Sobreescribe el método toString para que muestre la carta de la 
+siguiente manera [ numero – Palo]. Por ejemplo, [3 – CORAZONES]
+
+
+Clase Mazo
+
+Define el mazo de Cartas que se va a utilizar en el juego. 
+• Cartas. Contendrá las 52 cartas de la baraja en una estructura de 
+tipo ArrayList<Carta>
+Deberás generar los siguientes métodos:
+• Constructor sin parámetros. Genera un mazo de cartas con todas las 
+cartas. Para ello, deberemos recorrer todos los Palos y todo los 
+posibles números y generaremos todas las cartas y las añadiremos a 
+la lista. Para recorrer los palos puedes utilizar:
+for (Palo p: Palo.values())
+• Método barajar() sin parámetros. Se encargará de barajar el mazo 
+de cartas. Lo único que hace es utilizar el método shuffle de la clase 
+Collecction:
+Collections.shuffle(cartas);
+• Sobreescribe el método toString para mostrar todo el mazo de 
+cartas recorriendo la lista
+• solicitarCarta. Método sin parámetros que devuelve la primera carta 
+del mazo eliminándola de la lista.
+
+
+Clase Mano
+
+Representa la mano que tiene un usuario y por tanto también es una lista 
+de cartas, por lo que será una clase que contenga los mismos datos que 
+Mazo y por tanto la vamos a definir como una subclase de Mazo.
+La clase no define ningún atributo propio, sólo métodos nuevos, que son:
+• Constructor de la clase. Define una lista de caratas vacía, no invoca 
+al método de la superclase
+• Método valorMano sin parámetros. Calcula cual es valor que 
+tenemos en la mano de cartas. Para hacerlo recorreremos la lista de 
+cartas sumando los puntos de cada una.
+• Método finDeJuego que devuelve un boolean, indicando true si la 
+mano tiene más de 21 puntos, significando que el jugador se ha 
+pasado.
+• Sobreescribe el método toString para que invoque al método de la 
+superclase, pero antes muestre la puntuación de la mano
+• Método pedirCarta(Mazo m) al que se le pasa un mazo de cartas, 
+deberá solicitar una carta al mazo e incluirla en la mano.
+
+
+Clase Juego
+
+Implementa el método main para crear el juego. Deberá crear un mazo de 
+cartas y barajarlo. 
+A continuación creará un mazo de carta para el jugador y le preguntará si 
+quiere una carta. Si la quiere, se le solicitará un carta al mazo y acto 
+seguido se mostrará la mano.
+Si ha llegado al fin del juego (se ha pasado de 21) se sale diciendo que ha
+perdido, si no le pedirá al usuario si quiere otra carta. Si la quiere se pedirá 
+otra y se repetirá el proceso.
+Si no la quiere se saldrá del juego indicando la puntuación con la que se ha 
+plantado
